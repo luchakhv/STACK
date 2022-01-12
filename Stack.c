@@ -3,9 +3,10 @@
 #include <time.h>
 
 #define STACK_MAX_ITEMS 50
+typedef int Elem;
 typedef struct stack {
-    int elements[STACK_MAX_ITEMS];
-    int len;
+    Elem elements[STACK_MAX_ITEMS];
+    Elem len;
 } Stack;
 
 void Push(Stack *s, int n);
