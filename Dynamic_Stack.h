@@ -7,7 +7,7 @@ enum ERRORS {
 enum VARIABLES
 {
     MULTIPLIER = 2,
-    STACK_MAX_ELEMENTS =4,
+    STACK_INITIALISE =4,
     ARR_INCREASE = 7,
     ARR_REDUCE = 9
 };
