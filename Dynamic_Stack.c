@@ -21,7 +21,7 @@ Stack *CreateStack() {
 }
 
 int DeleteStack(Stack **s) {
-    if (s == NULL || s->elements == NULL || (*s) == NULL || (*s)->elements == NULL) {
+    if (s == NULL || (*s) == NULL || (*s)->elements == NULL) {
         ERROR(OUT_OF_MEMORY);
         return OUT_OF_MEMORY;
     }
