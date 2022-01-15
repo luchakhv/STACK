@@ -3,4 +3,4 @@ project(Structures C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Structures main.c Struct.h Struct.c)
+add_executable(Structures main.c Dynamic_Stack.h Dynamic_Stack.c)
