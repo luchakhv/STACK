@@ -10,7 +10,7 @@ Stack *CreateStack() {
         return NULL;
     }
     help->len = STACK_MAX_ELEMENTS;
-    help->elements = malloc(help->len * sizeof(Elem));
+    help->elements = calloc(help->len, sizeof(Elem));
     if (help->elements == NULL) {
         free(help);
         ERROR(OUT_OF_MEMORY);
@@ -21,7 +21,7 @@ Stack *CreateStack() {
 }
 
 int DeleteStack(Stack **s) {
-    if ((*s)->elements == NULL || (*s) == NULL) {
+    if (s == NULL || s->elements == NULL || (*s) == NULL || (*s)->elements == NULL) {
         ERROR(OUT_OF_MEMORY);
         return OUT_OF_MEMORY;
     }
@@ -32,7 +32,7 @@ int DeleteStack(Stack **s) {
 }
 
 int Push(Stack *s, const int n) {
-    if (s->elements == NULL || s == NULL) {
+    if (s == NULL || s->elements == NULL) {
         ERROR(OUT_OF_MEMORY);
         return OUT_OF_MEMORY;
     }
@@ -41,10 +41,11 @@ int Push(Stack *s, const int n) {
     }
     s->elements[s->CurLen] = n;
     s->CurLen++;
+    return 0;
 }
 
 int Pop(Stack *s) {
-    if (s->elements == NULL || s == NULL) {
+    if (s == NULL || s->elements == NULL) {
         ERROR(OUT_OF_MEMORY);
         return OUT_OF_MEMORY;
     }
@@ -60,7 +61,7 @@ int Pop(Stack *s) {
 }
 
 int Peek(const Stack *s) {
-    if (s->elements == NULL || s == NULL) {
+    if (s == NULL || s->elements == NULL) {
         ERROR(OUT_OF_MEMORY);
         return OUT_OF_MEMORY;
     }
@@ -72,7 +73,7 @@ int Peek(const Stack *s) {
 }
 
 int IsStackEmpty(const Stack *s) {
-    if (s->elements == NULL || s == NULL) {
+    if (s == NULL || s->elements == NULL) {
         ERROR(OUT_OF_MEMORY);
         return OUT_OF_MEMORY;
     }
@@ -84,31 +85,30 @@ int IsStackEmpty(const Stack *s) {
 
 
 int Resize(Stack *s, int flag) {
-    if (s->elements == NULL || s == NULL) {
+    if (s == NULL || s->elements == NULL) {
         ERROR(OUT_OF_MEMORY);
         return OUT_OF_MEMORY;
     }
 
     switch (flag) {
-        case (ARR_INCREASE): {
+        case (ARR_INCREASE):
             s->len *= MULTIPLIER;
             s->elements = realloc(s->elements, s->len * sizeof(Elem));
             if (s->elements == NULL) {
                 ERROR(OUT_OF_MEMORY);
                 return OUT_OF_MEMORY;
             }
-
-        }
-        case (ARR_REDUCE): {
+            break;
+        case (ARR_REDUCE):
             s->len = s->len / MULTIPLIER;
             s->elements = realloc(s->elements, s->len * sizeof(Elem));
             if (s->elements == NULL) {
                 ERROR(OUT_OF_MEMORY);
                 return OUT_OF_MEMORY;
             }
-
-        }
+            break;
     }
+
     return 0;
 }
 
@@ -126,6 +126,7 @@ int ERROR(int err) {
             break;
         default:
             printf("Unexpected error\n");
+            break;
     }
     return 0;
 }
