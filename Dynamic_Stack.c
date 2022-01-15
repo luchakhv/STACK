@@ -93,17 +93,23 @@ int Resize(Stack *s, int flag) {
     switch (flag) {
         case (ARR_INCREASE):
             s->len *= MULTIPLIER;
+            Elem *p = realloc(s->elements, s->len * sizeof(Elem));
+            if (p!=NULL)
             s->elements = realloc(s->elements, s->len * sizeof(Elem));
-            if (s->elements == NULL) {
+            else  {
                 ERROR(OUT_OF_MEMORY);
+                free(p);
                 return OUT_OF_MEMORY;
             }
             break;
         case (ARR_REDUCE):
             s->len = s->len / MULTIPLIER;
+            Elem *w = realloc(s->elements, s->len * sizeof(Elem));
+            if (w!=NULL)
             s->elements = realloc(s->elements, s->len * sizeof(Elem));
-            if (s->elements == NULL) {
+            else  {
                 ERROR(OUT_OF_MEMORY);
+                free(w);
                 return OUT_OF_MEMORY;
             }
             break;
