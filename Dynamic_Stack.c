@@ -9,7 +9,7 @@ Stack *CreateStack() {
         ERROR(OUT_OF_MEMORY);
         return NULL;
     }
-    help->len = STACK_MAX_ELEMENTS;
+    help->len = STACK_INITIALISE;
     help->elements = calloc(help->len, sizeof(Elem));
     if (help->elements == NULL) {
         free(help);
